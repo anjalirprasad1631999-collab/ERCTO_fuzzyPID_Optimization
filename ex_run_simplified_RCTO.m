@@ -12,14 +12,8 @@ disp('Best Solution (combinations of Kp, Ki and Kd');
 disp(best_solution);
 
 
-%best_solution (1xN vector)
-%best_fitness (scalar)
-%fitness_history (1xma_iter or similar)
 
-results_filename='sctoa_results.mat'; % sets the filename for results
+results_filename='sctoa_results.mat'; 
 save(results_filename, 'best_solution','best_fitness','fitness_history');
 
-%Also save readable text versions (for terminal access)
-writematrix(best_solution,'best_solution.txt');
-writematrix(best_fitness,'best_fitness.txt');
-writematrix(fitness_history,'fitness_history.txt'); %transponded for readability
+
