@@ -27,7 +27,7 @@ function [best_solution, best_fitness, fitness_history] = SCTOA_KMeans_DualCross
             cluster_fits = fitness(cluster_idx == c);
 
             if isempty(cluster_members)
-                clusterToppers(c, :) = lb + rand(1, dim) .* (ub - lb);     % --- This code handles the case where a K-means cluster becomes empty. It reinitializes the cluster topper randomly within bounds and assigns it a large (bad) fitness value to maintain algorithm stability and diversity.
+                clusterToppers(c, :) = lb + rand(1, dim) .* (ub - lb);     
                 clusterFitness(c) = inf;
             else
                 [minVal, minIdx] = min(cluster_fits);
@@ -66,7 +66,7 @@ function [best_solution, best_fitness, fitness_history] = SCTOA_KMeans_DualCross
 
                 mutation = 0.01 * (ub - lb) .* randn(1, dim);
                 students(i, :) = students(i, :) + mutation;
-                students(i, :) = max(min(students(i, :), ub), lb);      % --- here cluster toppers are not exempted from getting updated, all students including the cluster topper are updated, so if needed we can change it later, codes are written in another file. 
+                students(i, :) = max(min(students(i, :), ub), lb);      
 
                 val = floor(students(i, :));
                 val = max(min(val, 6), 0);
@@ -93,10 +93,10 @@ function [best_solution, best_fitness, fitness_history] = SCTOA_KMeans_DualCross
 
             % --- Crossover with section topper ---
             child1 = student;
-            child1(cross_idx) = sectionTopper(cross_idx);       % --- At these random positions, replace the student’s values with those of the section topper.
-            child1 = child1 + 0.01 * (ub - lb) .* randn(1, dim);  % --- This introduces variability, helps escape local minima, and simulates biological “learning noise.”
-            child1 = max(min(child1, ub), lb);                      % --- Ensures every element of child1 stays within the search space [lb, ub].
-            val1 = floor(child1);                                       % --- This converts continuous-valued parameters into integer-like rule indices (0–6)
+            child1(cross_idx) = sectionTopper(cross_idx);       
+            child1 = child1 + 0.01 * (ub - lb) .* randn(1, dim);  
+            child1 = max(min(child1, ub), lb);                      
+            val1 = floor(child1);                                       
             val1 = max(min(val1, 6), 0);
             fit1 = objFunc(val1);
 
