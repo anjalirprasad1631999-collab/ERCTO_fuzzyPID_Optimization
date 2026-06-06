@@ -1,9 +1,9 @@
-dim = 147;                          % Total decision variables (e.g. 49 rules * 3 outputs)
-numStudents = 60;                  % Number of students (population size)
-numClusters = 3;                   % Number of clusters (was numSections)
-maxIter = 30;                       % Number of iterations
+dim = 147;                         
+numStudents = 60;                  
+numClusters = 3;                   
+maxIter = 30;                       
 lb = zeros(1, dim);               
-ub = 6 * ones(1, dim);             % Kp, Ki, Kd range [0, 6]
+ub = 6 * ones(1, dim);             
 
 [best_solution, best_fitness, fitness_history] = SCTOA_KMeans_DualCrossover(@myFuzzyObjective, dim, numStudents, numClusters, maxIter, lb, ub);
 
